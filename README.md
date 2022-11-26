@@ -14,6 +14,8 @@ yarn
 yarn build
 ```
 
+## Bump
+
 ## Usage
 
 See `package.json` and [lerna](https://github.com/lerna/lerna) docs for commands.
