@@ -1,5 +1,5 @@
 {
-  "name": "@opentranslate/caiyun",
+  "name": "@theowenyoung/caiyun",
   "private": false,
   "publishConfig": {
     "access": "public"
@@ -23,7 +23,7 @@
   "author": "OpenTranslate",
   "license": "MIT",
   "dependencies": {
-    "@opentranslate/translator": "^1.4.1",
+    "@theowenyoung/translator": "^1.4.1",
     "@types/node": "^12.11.7",
     "@types/qs": "^6.5.3",
     "qs": "^6.8.0"

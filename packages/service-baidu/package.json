@@ -1,5 +1,5 @@
 {
-  "name": "@opentranslate/baidu",
+  "name": "@theowenyoung/baidu",
   "private": false,
   "publishConfig": {
     "access": "public"
@@ -23,7 +23,7 @@
   "author": "OpenTranslate",
   "license": "MIT",
   "dependencies": {
-    "@opentranslate/translator": "^1.4.1",
+    "@theowenyoung/translator": "^1.4.1",
     "@types/md5": "^2.1.33",
     "@types/qs": "^6.5.3",
     "md5": "^2.2.1",

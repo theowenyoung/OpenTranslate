@@ -1,10 +1,10 @@
 /* eslint-disable @typescript-eslint/camelcase */
 import {
   Language,
-  Translator,
+  TranslateError,
   TranslateQueryResult,
-  TranslateError
-} from "@opentranslate/translator";
+  Translator,
+} from "@theowenyoung/translator";
 import qs from "qs";
 
 type CaiyunTranslateResult = {
@@ -17,7 +17,7 @@ const langMap: [Language, string][] = [
   ["auto", "auto"],
   ["zh-CN", "zh"],
   ["en", "en"],
-  ["ja", "ja"]
+  ["ja", "ja"],
 ];
 
 export interface CaiyunConfig {
@@ -32,7 +32,7 @@ export class Caiyun extends Translator<CaiyunConfig> {
 
   /** Custom lang to translator lang */
   private static readonly langMapReverse = new Map(
-    langMap.map(([translatorLang, lang]) => [lang, translatorLang])
+    langMap.map(([translatorLang, lang]) => [lang, translatorLang]),
   );
 
   getSupportLanguages(): Language[] {
@@ -40,19 +40,21 @@ export class Caiyun extends Translator<CaiyunConfig> {
   }
 
   async textToSpeech(text: string, lang: Language): Promise<string> {
-    return `http://tts.baidu.com/text2audio?${qs.stringify({
-      lan: Caiyun.langMap.get(lang !== "auto" ? lang : "zh-CN") || "zh",
-      ie: "UTF-8",
-      spd: 5,
-      text
-    })}`;
+    return `http://tts.baidu.com/text2audio?${
+      qs.stringify({
+        lan: Caiyun.langMap.get(lang !== "auto" ? lang : "zh-CN") || "zh",
+        ie: "UTF-8",
+        spd: 5,
+        text,
+      })
+    }`;
   }
 
   protected async query(
     text: string,
     from: Language,
     to: Language,
-    config: CaiyunConfig
+    config: CaiyunConfig,
   ): Promise<TranslateQueryResult> {
     const detect = from === "auto";
     const source = text.split(/\n+/);
@@ -61,15 +63,15 @@ export class Caiyun extends Translator<CaiyunConfig> {
       {
         headers: {
           "content-type": "application/json",
-          "x-authorization": "token " + config.token
+          "x-authorization": "token " + config.token,
         },
         method: "POST",
         data: JSON.stringify({
           source,
           trans_type: `${Caiyun.langMap.get(from)}2${Caiyun.langMap.get(to)}`,
-          detect
-        })
-      }
+          detect,
+        }),
+      },
     ).catch(() => {});
     if (!response || !response.data) {
       throw new TranslateError("NETWORK_ERROR");
@@ -81,12 +83,12 @@ export class Caiyun extends Translator<CaiyunConfig> {
       to,
       origin: {
         paragraphs: source,
-        tts: await this.textToSpeech(text, from)
+        tts: await this.textToSpeech(text, from),
       },
       trans: {
         paragraphs: result.target,
-        tts: await this.textToSpeech(result.target.join(" "), to)
-      }
+        tts: await this.textToSpeech(result.target.join(" "), to),
+      },
     };
   }
 }

@@ -1,9 +1,9 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import {
   Language,
+  TranslateQueryResult,
   Translator,
-  TranslateQueryResult
-} from "@opentranslate/translator";
+} from "@theowenyoung/translator";
 import SHA256 from "crypto-js/sha256";
 import HMACSHA256 from "crypto-js/hmac-sha256";
 import EncHEX from "crypto-js/enc-hex";
@@ -30,7 +30,7 @@ const langMap: [Language, string][] = [
   ["ru", "ru"],
   ["th", "th"],
   ["tr", "tr"],
-  ["vi", "vi"]
+  ["vi", "vi"],
 ];
 
 export interface TencentConfig {
@@ -44,7 +44,7 @@ export class Tencent extends Translator<TencentConfig> {
 
   /** Custom lang to translator lang */
   private static readonly langMapReverse = new Map(
-    langMap.map(([translatorLang, lang]) => [lang, translatorLang])
+    langMap.map(([translatorLang, lang]) => [lang, translatorLang]),
   );
 
   private static getUTCDate(dateObj: Date): string {
@@ -62,12 +62,11 @@ export class Tencent extends Translator<TencentConfig> {
     }
     Tencent.isStubHeaders[host] = true;
 
-    const extGlobal =
-      typeof browser !== "undefined"
-        ? browser
-        : typeof chrome !== "undefined"
-        ? chrome
-        : null;
+    const extGlobal = typeof browser !== "undefined"
+      ? browser
+      : typeof chrome !== "undefined"
+      ? chrome
+      : null;
 
     const extraInfoSpec = ["blocking", "requestHeaders"];
 
@@ -76,7 +75,7 @@ export class Tencent extends Translator<TencentConfig> {
     if (
       extGlobal.webRequest.OnBeforeSendHeadersOptions &&
       extGlobal.webRequest.OnBeforeSendHeadersOptions.hasOwnProperty(
-        "EXTRA_HEADERS"
+        "EXTRA_HEADERS",
       )
     ) {
       extraInfoSpec.push("extraHeaders");
@@ -86,7 +85,7 @@ export class Tencent extends Translator<TencentConfig> {
       (details: any) => {
         if (details && details.requestHeaders) {
           const headers = details.requestHeaders.filter(
-            (header: any) => !/Host/i.test(header.name)
+            (header: any) => !/Host/i.test(header.name),
           );
 
           headers.push({ name: "Host", value: host });
@@ -97,7 +96,7 @@ export class Tencent extends Translator<TencentConfig> {
         return details;
       },
       { urls: [`*://${host}/*`] },
-      extraInfoSpec
+      extraInfoSpec,
     );
   }
 
@@ -107,7 +106,7 @@ export class Tencent extends Translator<TencentConfig> {
     action,
     payload,
     service,
-    version
+    version,
   }: {
     secretId: string;
     secretKey: string;
@@ -130,7 +129,7 @@ export class Tencent extends Translator<TencentConfig> {
       `host:${host}`,
       "",
       "content-type;host",
-      SHA256(payload).toString(EncHEX)
+      SHA256(payload).toString(EncHEX),
     ].join("\n");
 
     const datestamp = Tencent.getUTCDate(now);
@@ -139,7 +138,7 @@ export class Tencent extends Translator<TencentConfig> {
       "TC3-HMAC-SHA256",
       timestamp,
       `${datestamp}/${service}/tc3_request`,
-      SHA256(CanonicalRequest).toString(EncHEX)
+      SHA256(CanonicalRequest).toString(EncHEX),
     ].join("\n");
 
     const SecretDate = HMACSHA256(datestamp, `TC3${secretKey}`);
@@ -149,7 +148,7 @@ export class Tencent extends Translator<TencentConfig> {
     const SecretSigning = HMACSHA256("tc3_request", SecretService);
 
     const Signature: string = HMACSHA256(StringToSign, SecretSigning).toString(
-      EncHEX
+      EncHEX,
     );
 
     return this.request<R>(`https://${service}.tencentcloudapi.com`, {
@@ -161,9 +160,10 @@ export class Tencent extends Translator<TencentConfig> {
         "X-TC-Timestamp": timestamp,
         "X-TC-Region": "ap-beijing",
         "X-TC-Version": version,
-        Authorization: `TC3-HMAC-SHA256 Credential=${secretId}/${datestamp}/${service}/tc3_request, SignedHeaders=content-type;host, Signature=${Signature}`
+        Authorization:
+          `TC3-HMAC-SHA256 Credential=${secretId}/${datestamp}/${service}/tc3_request, SignedHeaders=content-type;host, Signature=${Signature}`,
       },
-      data: payload
+      data: payload,
     });
   }
 
@@ -171,13 +171,13 @@ export class Tencent extends Translator<TencentConfig> {
     text: string,
     from: Language,
     to: Language,
-    config: TencentConfig
+    config: TencentConfig,
   ): Promise<TranslateQueryResult> {
     const RequestPayload: string = JSON.stringify({
       ProjectId: 0,
       Source: Tencent.langMap.get(from),
       SourceText: text,
-      Target: Tencent.langMap.get(to)
+      Target: Tencent.langMap.get(to),
     });
 
     const { data } = await this.signedRequest<{
@@ -193,7 +193,7 @@ export class Tencent extends Translator<TencentConfig> {
       action: "TextTranslate",
       payload: RequestPayload,
       service: "tmt",
-      version: "2018-03-21"
+      version: "2018-03-21",
     });
 
     return {
@@ -201,11 +201,11 @@ export class Tencent extends Translator<TencentConfig> {
       from: Tencent.langMapReverse.get(data.Response.Source) || from,
       to: Tencent.langMapReverse.get(data.Response.Target) || to,
       origin: {
-        paragraphs: text.split(/\n+/)
+        paragraphs: text.split(/\n+/),
       },
       trans: {
-        paragraphs: decodeHTMLEntities(data.Response.TargetText).split(/\n+/)
-      }
+        paragraphs: decodeHTMLEntities(data.Response.TargetText).split(/\n+/),
+      },
     };
   }
 
@@ -218,7 +218,7 @@ export class Tencent extends Translator<TencentConfig> {
   async detect(text: string): Promise<Language> {
     const RequestPayload: string = JSON.stringify({
       ProjectId: 0,
-      Text: text
+      Text: text,
     });
 
     const { data } = await this.signedRequest<{
@@ -232,7 +232,7 @@ export class Tencent extends Translator<TencentConfig> {
       action: "LanguageDetect",
       payload: RequestPayload,
       service: "tmt",
-      version: "2018-03-21"
+      version: "2018-03-21",
     });
 
     return Tencent.langMapReverse.get(data.Response.Lang) || "auto";
@@ -245,7 +245,7 @@ export class Tencent extends Translator<TencentConfig> {
       SessionId: `${Date.now()}`,
       ModelType: -1,
       PrimaryLanguage: lang.startsWith("zh") ? 1 : 2,
-      Codec: "mp3"
+      Codec: "mp3",
     });
 
     const { data } = await this.signedRequest<{
@@ -260,7 +260,7 @@ export class Tencent extends Translator<TencentConfig> {
       action: "TextToVoice",
       payload: RequestPayload,
       service: "tts",
-      version: "2019-08-23"
+      version: "2019-08-23",
     });
 
     return data.Response.Audio || null;

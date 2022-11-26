@@ -21,23 +21,26 @@ See `package.json` and [lerna](https://github.com/lerna/lerna) docs for commands
 - Run lerna commands with `yarn lerna <command>`.
   - Create package: `yarn lerna create module-1`.
   - Create translator "google": `yarn create-translator google`.
-  - Install `@opentranslate/module-1` for `@opentranslate/module-2`: `yarn lerna add @opentranslate/module-1 packages/module-2`.
+  - Install `@theowenyoung/module-1` for `@theowenyoung/module-2`: `yarn lerna add @theowenyoung/module-1 packages/module-2`.
 - Git-commit with `yarn commit` or [vscode extension](https://marketplace.visualstudio.com/items?itemName=KnisterPeter.vscode-commitizen).
 
 ## Badges
+
 ### For library under OpenTranslate Standard.
+
 [![OpenTranslate](https://img.shields.io/badge/OpenTranslate-Compatible-brightgreen)](https://github.com/OpenTranslate)
+
 ```markdown
 [![OpenTranslate](https://img.shields.io/badge/OpenTranslate-Compatible-brightgreen)](https://github.com/OpenTranslate)
 ```
 
-### For library/software using OpenTranslate. 
+### For library/software using OpenTranslate.
+
 [![OpenTranslate](https://img.shields.io/badge/Powered_by-OpenTranslate-brightgreen)](https://github.com/OpenTranslate)
 
 ```markdown
 [![OpenTranslate](https://img.shields.io/badge/Powered_by-OpenTranslate-brightgreen)](https://github.com/OpenTranslate)
 ```
-
 
 ## Disclaimer
 

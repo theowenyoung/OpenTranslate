@@ -1,6 +1,6 @@
-# @opentranslate/sogou
+# @theowenyoung/sogou
 
-[![npm-version](https://img.shields.io/npm/v/@opentranslate/sogou.svg)](https://www.npmjs.com/package/@opentranslate/sogou)
+[![npm-version](https://img.shields.io/npm/v/@theowenyoung/sogou.svg)](https://www.npmjs.com/package/@theowenyoung/sogou)
 [![OpenTranslate](https://img.shields.io/badge/OpenTranslate-Compatible-brightgreen)](https://github.com/OpenTranslate)
 
 Sogou translator with [OpenTranslate](https://github.com/OpenTranslate) API.
@@ -10,19 +10,19 @@ Sogou translator with [OpenTranslate](https://github.com/OpenTranslate) API.
 Yarn
 
 ```
-yarn add @opentranslate/sogou
+yarn add @theowenyoung/sogou
 ```
 
 NPM
 
 ```
-npm i @opentranslate/sogou
+npm i @theowenyoung/sogou
 ```
 
 ## Usage
 
 ```
-import Sogou from '@opentranslate/sogou'
+import Sogou from '@theowenyoung/sogou'
 //please refer to https://deepi.sogou.com/?from=translatepc
 const sogou = new Sogou(
     config: {

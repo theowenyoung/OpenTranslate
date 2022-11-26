@@ -1,5 +1,5 @@
 {
-  "name": "@opentranslate/google",
+  "name": "@theowenyoung/google",
   "private": false,
   "publishConfig": {
     "access": "public"
@@ -23,7 +23,7 @@
   "author": "OpenTranslate",
   "license": "MIT",
   "dependencies": {
-    "@opentranslate/translator": "^1.4.1",
+    "@theowenyoung/translator": "^1.4.1",
     "google-translate-open-api": "^1.3.4"
   }
 }

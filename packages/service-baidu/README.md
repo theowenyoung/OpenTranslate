@@ -1,6 +1,6 @@
-# @opentranslate/baidu
+# @theowenyoung/baidu
 
-[![npm-version](https://img.shields.io/npm/v/@opentranslate/baidu.svg)](https://www.npmjs.com/package/@opentranslate/baidu)
+[![npm-version](https://img.shields.io/npm/v/@theowenyoung/baidu.svg)](https://www.npmjs.com/package/@theowenyoung/baidu)
 [![OpenTranslate](https://img.shields.io/badge/OpenTranslate-Compatible-brightgreen)](https://github.com/OpenTranslate)
 
 Baidu translator with [OpenTranslate](https://github.com/OpenTranslate) API.
@@ -10,19 +10,19 @@ Baidu translator with [OpenTranslate](https://github.com/OpenTranslate) API.
 Yarn
 
 ```
-yarn add @opentranslate/baidu
+yarn add @theowenyoung/baidu
 ```
 
 NPM
 
 ```
-npm i @opentranslate/baidu
+npm i @theowenyoung/baidu
 ```
 
 ## Usage
 
 ```
-import Baidu from '@opentranslate/baidu'
+import Baidu from '@theowenyoung/baidu'
 
 //Please refer to http://api.fanyi.baidu.com/api/trans/product/prodinfo
 const baidu = new Baidu({

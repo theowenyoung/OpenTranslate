@@ -1,6 +1,6 @@
-# @opentranslate/google
+# @theowenyoung/google
 
-[![npm-version](https://img.shields.io/npm/v/@opentranslate/google.svg)](https://www.npmjs.com/package/@opentranslate/google)
+[![npm-version](https://img.shields.io/npm/v/@theowenyoung/google.svg)](https://www.npmjs.com/package/@theowenyoung/google)
 [![OpenTranslate](https://img.shields.io/badge/OpenTranslate-Compatible-brightgreen)](https://github.com/OpenTranslate)
 
 Google translator with [OpenTranslate](https://github.com/OpenTranslate) API.
@@ -10,19 +10,19 @@ Google translator with [OpenTranslate](https://github.com/OpenTranslate) API.
 Yarn
 
 ```
-yarn add @opentranslate/google
+yarn add @theowenyoung/google
 ```
 
 NPM
 
 ```
-npm i @opentranslate/google
+npm i @theowenyoung/google
 ```
 
 ## Usage
 
 ```
-import Google from '@opentranslate/google'
+import Google from '@theowenyoung/google'
 
 const google = new Google({
   order: ['com', 'cn'],

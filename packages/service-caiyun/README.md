@@ -1,6 +1,6 @@
-# @opentranslate/caiyun
+# @theowenyoung/caiyun
 
-[![npm-version](https://img.shields.io/npm/v/@opentranslate/caiyun.svg)](https://www.npmjs.com/package/@opentranslate/caiyun)
+[![npm-version](https://img.shields.io/npm/v/@theowenyoung/caiyun.svg)](https://www.npmjs.com/package/@theowenyoung/caiyun)
 [![OpenTranslate](https://img.shields.io/badge/OpenTranslate-Compatible-brightgreen)](https://github.com/OpenTranslate)
 
 caiyun translator with [OpenTranslate](https://github.com/OpenTranslate) API.
@@ -10,19 +10,19 @@ caiyun translator with [OpenTranslate](https://github.com/OpenTranslate) API.
 Yarn
 
 ```
-yarn add @opentranslate/caiyun
+yarn add @theowenyoung/caiyun
 ```
 
 NPM
 
 ```
-npm i @opentranslate/caiyun
+npm i @theowenyoung/caiyun
 ```
 
 ## Usage
 
 ```
-import Caiyun from '@opentranslate/caiyun'
+import Caiyun from '@theowenyoung/caiyun'
 
 const caiyun = new Caiyun({
     config: {

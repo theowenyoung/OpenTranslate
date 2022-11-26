@@ -1,5 +1,5 @@
 {
-  "name": "@opentranslate/translator",
+  "name": "@theowenyoung/translator",
   "private": false,
   "publishConfig": {
     "access": "public"
@@ -23,8 +23,9 @@
   "author": "OpenTranslate",
   "license": "MIT",
   "dependencies": {
-    "@opentranslate/languages": "^1.4.1",
-    "axios": "^0.19.0",
-    "franc-min": "^4.1.0"
+    "@theowenyoung/languages": "^1.4.1",
+    "axios": "^1.2.0",
+    "franc-min": "^4.1.0",
+    "@vespaiach/axios-fetch-adapter": "^0.3.1"
   }
 }

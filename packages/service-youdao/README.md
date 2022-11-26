@@ -1,6 +1,6 @@
-# @opentranslate/youdao
+# @theowenyoung/youdao
 
-[![npm-version](https://img.shields.io/npm/v/@opentranslate/youdao.svg)](https://www.npmjs.com/package/@opentranslate/youdao)
+[![npm-version](https://img.shields.io/npm/v/@theowenyoung/youdao.svg)](https://www.npmjs.com/package/@theowenyoung/youdao)
 [![OpenTranslate](https://img.shields.io/badge/OpenTranslate-Compatible-brightgreen)](https://github.com/OpenTranslate)
 
 Youdao translator with [OpenTranslate](https://github.com/OpenTranslate) API.
@@ -10,19 +10,19 @@ Youdao translator with [OpenTranslate](https://github.com/OpenTranslate) API.
 Yarn
 
 ```
-yarn add @opentranslate/youdao
+yarn add @theowenyoung/youdao
 ```
 
 NPM
 
 ```
-npm i @opentranslate/youdao
+npm i @theowenyoung/youdao
 ```
 
 ## Usage
 
 ```
-import Youdao from '@opentranslate/youdao'
+import Youdao from '@theowenyoung/youdao'
 //please visit http://ai.youdao.com/gw.s for more information.
 const youdao = new Youdao(config: {
     appKey: "your appKey",

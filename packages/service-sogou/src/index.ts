@@ -1,9 +1,9 @@
 import {
   Language,
-  Translator,
+  TranslateError,
   TranslateQueryResult,
-  TranslateError
-} from "@opentranslate/translator";
+  Translator,
+} from "@theowenyoung/translator";
 import md5 from "md5";
 import qs from "qs";
 
@@ -69,7 +69,7 @@ const langMap: [Language, string][] = [
   ["ur", "ur"],
   ["vi", "vi"],
   ["yua", "yua"],
-  ["yue", "yue"]
+  ["yue", "yue"],
 ];
 
 export interface SogouConfig {
@@ -90,19 +90,19 @@ export class Sogou extends Translator<SogouConfig> {
 
   /** Custom lang to translator lang */
   private static readonly langMapReverse = new Map(
-    langMap.map(([translatorLang, lang]) => [lang, translatorLang])
+    langMap.map(([translatorLang, lang]) => [lang, translatorLang]),
   );
 
   protected async query(
     text: string,
     from: Language,
     to: Language,
-    config: SogouConfig
+    config: SogouConfig,
   ): Promise<TranslateQueryResult> {
     const sign = md5(config.pid + text + Sogou.salt + config.key);
     const headers = {
       "content-type": "application/x-www-form-urlencoded",
-      accept: "application/json"
+      accept: "application/json",
     };
     const res = await this.request<SogouResult>(
       "http://fanyi.sogou.com/reventondc/api/sogouTranslate",
@@ -114,10 +114,10 @@ export class Sogou extends Translator<SogouConfig> {
           pid: config.pid,
           q: text,
           sign: sign,
-          salt: Sogou.salt
+          salt: Sogou.salt,
         }),
-        headers
-      }
+        headers,
+      },
     ).catch(() => {
       throw new TranslateError("NETWORK_ERROR");
     });
@@ -128,12 +128,12 @@ export class Sogou extends Translator<SogouConfig> {
       to,
       origin: {
         paragraphs: text.split(/\n+/),
-        tts: (await this.textToSpeech(text, from)) || ""
+        tts: (await this.textToSpeech(text, from)) || "",
       },
       trans: {
         paragraphs: [result.translation],
-        tts: (await this.textToSpeech(result.translation, to)) || ""
-      }
+        tts: (await this.textToSpeech(result.translation, to)) || "",
+      },
     };
   }
 
@@ -150,19 +150,23 @@ export class Sogou extends Translator<SogouConfig> {
 
   async textToSpeech(text: string, lang: Language): Promise<string | null> {
     return lang === "zh-TW"
-      ? `https://fanyi.sogou.com/reventondc/microsoftGetSpeakFile?${qs.stringify(
+      ? `https://fanyi.sogou.com/reventondc/microsoftGetSpeakFile?${
+        qs.stringify(
           {
             text,
             spokenDialect: "zh-CHT",
-            from: "translateweb"
-          }
-        )}`
-      : `https://fanyi.sogou.com/reventondc/synthesis?${qs.stringify({
+            from: "translateweb",
+          },
+        )
+      }`
+      : `https://fanyi.sogou.com/reventondc/synthesis?${
+        qs.stringify({
           text,
           speed: "1",
           lang: Sogou.langMap.get(lang) || "en",
-          from: "translateweb"
-        })}`;
+          from: "translateweb",
+        })
+      }`;
   }
 }
 

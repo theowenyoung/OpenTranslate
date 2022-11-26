@@ -1,6 +1,6 @@
-# @opentranslate/tencent
+# @theowenyoung/tencent
 
-[![npm-version](https://img.shields.io/npm/v/@opentranslate/tencent.svg)](https://www.npmjs.com/package/@opentranslate/tencent)
+[![npm-version](https://img.shields.io/npm/v/@theowenyoung/tencent.svg)](https://www.npmjs.com/package/@theowenyoung/tencent)
 [![OpenTranslate](https://img.shields.io/badge/OpenTranslate-Compatible-brightgreen)](https://github.com/OpenTranslate)
 
 Tencent translator with [OpenTranslate](https://github.com/OpenTranslate) API.
@@ -10,19 +10,19 @@ Tencent translator with [OpenTranslate](https://github.com/OpenTranslate) API.
 Yarn
 
 ```
-yarn add @opentranslate/tencent
+yarn add @theowenyoung/tencent
 ```
 
 NPM
 
 ```
-npm i @opentranslate/tencent
+npm i @theowenyoung/tencent
 ```
 
 ## Usage
 
 ```
-import Tencent from '@opentranslate/tencent'
+import Tencent from '@theowenyoung/tencent'
 
 const tencent = new Tencent({
   config: {

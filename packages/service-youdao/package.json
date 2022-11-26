@@ -1,5 +1,5 @@
 {
-  "name": "@opentranslate/youdao",
+  "name": "@theowenyoung/youdao",
   "private": false,
   "publishConfig": {
     "access": "public"
@@ -23,7 +23,7 @@
   "author": "OpenTranslate",
   "license": "MIT",
   "dependencies": {
-    "@opentranslate/translator": "^1.4.1",
+    "@theowenyoung/translator": "^1.4.1",
     "js-sha256": "^0.9.0"
   }
 }

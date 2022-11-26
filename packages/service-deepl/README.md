@@ -1,6 +1,6 @@
-# @opentranslate/deepl
+# @theowenyoung/deepl
 
-[![npm-version](https://img.shields.io/npm/v/@opentranslate/deepl.svg)](https://www.npmjs.com/package/@opentranslate/deepl)
+[![npm-version](https://img.shields.io/npm/v/@theowenyoung/deepl.svg)](https://www.npmjs.com/package/@theowenyoung/deepl)
 [![OpenTranslate](https://img.shields.io/badge/OpenTranslate-Compatible-brightgreen)](https://github.com/OpenTranslate)
 
 Deepl translator with [OpenTranslate](https://github.com/OpenTranslate) API.
@@ -10,19 +10,19 @@ Deepl translator with [OpenTranslate](https://github.com/OpenTranslate) API.
 Yarn
 
 ```
-yarn add @opentranslate/deepl
+yarn add @theowenyoung/deepl
 ```
 
 NPM
 
 ```
-npm i @opentranslate/deepl
+npm i @theowenyoung/deepl
 ```
 
 ## Usage
 
 ```
-import Deepl from '@opentranslate/deepl'
+import Deepl from '@theowenyoung/deepl'
 
 const deepl = new Deepl({
     config: {

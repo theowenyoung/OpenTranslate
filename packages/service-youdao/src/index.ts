@@ -1,9 +1,9 @@
 import {
   Language,
-  Translator,
+  TranslateError,
   TranslateQueryResult,
-  TranslateError
-} from "@opentranslate/translator";
+  Translator,
+} from "@theowenyoung/translator";
 import { sha256 } from "js-sha256";
 import qs from "qs";
 
@@ -26,7 +26,7 @@ const langMap: [Language, string][] = [
   ["ar", "ar"],
   ["id", "id"],
   ["vi", "vi"],
-  ["it", "it"]
+  ["it", "it"],
 ];
 
 export interface YoudaoConfig {
@@ -47,14 +47,14 @@ export class Youdao extends Translator<YoudaoConfig> {
 
   /** Custom lang to translator lang */
   private static readonly langMapReverse = new Map(
-    langMap.map(([translatorLang, lang]) => [lang, translatorLang])
+    langMap.map(([translatorLang, lang]) => [lang, translatorLang]),
   );
 
   protected async query(
     text: string,
     from: Language,
     to: Language,
-    config: YoudaoConfig
+    config: YoudaoConfig,
   ): Promise<TranslateQueryResult> {
     const salt = new Date().getTime();
     const curTime = Math.round(new Date().getTime() / 1000);
@@ -74,10 +74,10 @@ export class Youdao extends Translator<YoudaoConfig> {
           signType: "v3",
           curtime: curTime,
           headers: {
-            "Content-Type": "application/x-www-form-urlencoded"
-          }
-        })
-      }
+            "Content-Type": "application/x-www-form-urlencoded",
+          },
+        }),
+      },
     ).catch(() => {
       throw new TranslateError("NETWORK_ERROR");
     });
@@ -88,14 +88,13 @@ export class Youdao extends Translator<YoudaoConfig> {
       to,
       origin: {
         paragraphs: text.split(/\n+/),
-        tts: (await this.textToSpeech(text, from)) || undefined
+        tts: (await this.textToSpeech(text, from)) || undefined,
       },
       trans: {
         paragraphs: result.translation,
-        tts:
-          (await this.textToSpeech(result.translation.join("\n"), to)) ||
-          undefined
-      }
+        tts: (await this.textToSpeech(result.translation.join("\n"), to)) ||
+          undefined,
+      },
     };
   }
 
@@ -110,7 +109,7 @@ export class Youdao extends Translator<YoudaoConfig> {
       en: "eng",
       ja: "jap",
       ko: "ko",
-      fr: "fr"
+      fr: "fr",
     };
     const voiceLang = standard2custom[lang];
     if (!voiceLang) return null;
@@ -120,7 +119,7 @@ export class Youdao extends Translator<YoudaoConfig> {
       qs.stringify({
         word: text,
         le: voiceLang,
-        keyfrom: "speaker-target"
+        keyfrom: "speaker-target",
       })
     );
   }

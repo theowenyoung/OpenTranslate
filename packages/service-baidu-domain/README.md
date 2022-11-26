@@ -1,6 +1,6 @@
-# @opentranslate/baidu-domain
+# @theowenyoung/baidu-domain
 
-[![npm-version](https://img.shields.io/npm/v/@opentranslate/baidu-domain.svg)](https://www.npmjs.com/package/@opentranslate/baidu-domain)
+[![npm-version](https://img.shields.io/npm/v/@theowenyoung/baidu-domain.svg)](https://www.npmjs.com/package/@theowenyoung/baidu-domain)
 [![OpenTranslate](https://img.shields.io/badge/OpenTranslate-Compatible-brightgreen)](https://github.com/OpenTranslate)
 
 Baidu-domain translator with [OpenTranslate](https://github.com/OpenTranslate) API.
@@ -10,19 +10,19 @@ Baidu-domain translator with [OpenTranslate](https://github.com/OpenTranslate) A
 Yarn
 
 ```
-yarn add @opentranslate/baidu-domain
+yarn add @theowenyoung/baidu-domain
 ```
 
 NPM
 
 ```
-npm i @opentranslate/baidu-domain
+npm i @theowenyoung/baidu-domain
 ```
 
 ## Usage
 
 ```
-import BaiduDomain from '@opentranslate/baidu-domain'
+import BaiduDomain from '@theowenyoung/baidu-domain'
 
 //please refer to https://api.fanyi.baidu.com/doc/22 for more details
 const baiduDomain = new BaiduDomain({

@@ -1,9 +1,9 @@
 import {
   Language,
-  Translator,
   TranslateError,
-  TranslateQueryResult
-} from "@opentranslate/translator";
+  TranslateQueryResult,
+  Translator,
+} from "@theowenyoung/translator";
 import md5 from "md5";
 import qs from "qs";
 
@@ -14,7 +14,7 @@ export type Domain = typeof domains[number];
 const langMap: [Language, string][] = [
   ["auto", "auto"],
   ["zh-CN", "zh"],
-  ["en", "en"]
+  ["en", "en"],
 ];
 
 export interface BaiduDomainConfig {
@@ -33,7 +33,7 @@ export class BaiduDomain extends Translator<BaiduDomainConfig> {
     text: string,
     from: Language,
     to: Language,
-    config: BaiduDomainConfig
+    config: BaiduDomainConfig,
   ): Promise<TranslateQueryResult> {
     type BaiduDomainTranslateError = {
       error_code: "54001" | string;
@@ -63,8 +63,8 @@ export class BaiduDomain extends Translator<BaiduDomainConfig> {
         salt,
         appid,
         domain,
-        sign: md5(appid + text + salt + domain + key)
-      }
+        sign: md5(appid + text + salt + domain + key),
+      },
     }).catch(() => {
       throw new TranslateError("NETWORK_ERROR");
     });
@@ -75,18 +75,18 @@ export class BaiduDomain extends Translator<BaiduDomainConfig> {
       console.error(
         new Error(
           "[BaiduDomain service]" +
-            (data as BaiduDomainTranslateError).error_msg
-        )
+            (data as BaiduDomainTranslateError).error_msg,
+        ),
       );
       throw new TranslateError("API_SERVER_ERROR");
     }
 
     const {
       trans_result: transResult,
-      from: langDetected
+      from: langDetected,
     } = data as BaiduDomainTranslateResult;
     const detectedFrom = BaiduDomain.langMapReverse.get(
-      langDetected
+      langDetected,
     ) as Language;
     const transParagraphs = transResult.map(({ dst }) => dst);
 
@@ -96,12 +96,12 @@ export class BaiduDomain extends Translator<BaiduDomainConfig> {
       to,
       origin: {
         paragraphs: transResult.map(({ src }) => src),
-        tts: await this.textToSpeech(text, detectedFrom)
+        tts: await this.textToSpeech(text, detectedFrom),
       },
       trans: {
         paragraphs: transParagraphs,
-        tts: await this.textToSpeech(transParagraphs.join(" "), to)
-      }
+        tts: await this.textToSpeech(transParagraphs.join(" "), to),
+      },
     };
   }
 
@@ -110,7 +110,7 @@ export class BaiduDomain extends Translator<BaiduDomainConfig> {
 
   /** Custom lang to translator lang */
   private static readonly langMapReverse = new Map(
-    langMap.map(([translatorLang, lang]) => [lang, translatorLang])
+    langMap.map(([translatorLang, lang]) => [lang, translatorLang]),
   );
 
   getSupportLanguages(): Language[] {
@@ -118,12 +118,14 @@ export class BaiduDomain extends Translator<BaiduDomainConfig> {
   }
 
   async textToSpeech(text: string, lang: Language): Promise<string> {
-    return `http://tts.baidu.com/text2audio?${qs.stringify({
-      lan: BaiduDomain.langMap.get(lang !== "auto" ? lang : "zh-CN") || "zh",
-      ie: "UTF-8",
-      spd: 5,
-      text
-    })}`;
+    return `http://tts.baidu.com/text2audio?${
+      qs.stringify({
+        lan: BaiduDomain.langMap.get(lang !== "auto" ? lang : "zh-CN") || "zh",
+        ie: "UTF-8",
+        spd: 5,
+        text,
+      })
+    }`;
   }
 }
 

@@ -3,7 +3,7 @@ import {
   Translator,
   TranslateError,
   TranslateQueryResult
-} from "@opentranslate/translator";
+} from "@theowenyoung/translator";
 import md5 from "md5";
 import qs from "qs";
 

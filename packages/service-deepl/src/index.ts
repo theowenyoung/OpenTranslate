@@ -1,9 +1,9 @@
 import {
   Language,
-  Translator,
+  TranslateError,
   TranslateQueryResult,
-  TranslateError
-} from "@opentranslate/translator";
+  Translator,
+} from "@theowenyoung/translator";
 import qs from "qs";
 
 const langMap: [Language, string][] = [
@@ -19,7 +19,7 @@ const langMap: [Language, string][] = [
   ["nl", "NL"],
   ["pl", "PL"],
   ["pt", "PT"],
-  ["ru", "RU"]
+  ["ru", "RU"],
 ];
 
 export interface DeeplConfig {
@@ -88,14 +88,14 @@ export class Deepl extends Translator<DeeplConfig> {
 
   /** Custom lang to translator lang */
   private static readonly langMapReverse = new Map(
-    langMap.map(([translatorLang, lang]) => [lang, translatorLang])
+    langMap.map(([translatorLang, lang]) => [lang, translatorLang]),
   );
 
   protected async query(
     text: string,
     from: Language,
     to: Language,
-    config: DeeplConfig
+    config: DeeplConfig,
   ): Promise<TranslateQueryResult> {
     const response = await this.request<DeeplResult>(
       "https://api.deepl.com/v2/translate",
@@ -104,9 +104,9 @@ export class Deepl extends Translator<DeeplConfig> {
         data: qs.stringify({
           ...config,
           ["source_lang"]: Deepl.langMap.get(from),
-          ["target_lang"]: Deepl.langMap.get(to)
-        })
-      }
+          ["target_lang"]: Deepl.langMap.get(to),
+        }),
+      },
     ).catch(() => {});
 
     if (!response || !response.data) {
@@ -117,13 +117,12 @@ export class Deepl extends Translator<DeeplConfig> {
 
     return {
       text: text,
-      from:
-        (translations[0] &&
-          Deepl.langMapReverse.get(translations[0].detected_source_language)) ||
+      from: (translations[0] &&
+        Deepl.langMapReverse.get(translations[0].detected_source_language)) ||
         from,
       to,
       origin: { paragraphs: text.split(/\n+/) },
-      trans: { paragraphs: translations.map(t => t.text) }
+      trans: { paragraphs: translations.map((t) => t.text) },
     };
   }
 

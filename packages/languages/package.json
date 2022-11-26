@@ -1,5 +1,5 @@
 {
-  "name": "@opentranslate/languages",
+  "name": "@theowenyoung/languages",
   "private": false,
   "publishConfig": {
     "access": "public"

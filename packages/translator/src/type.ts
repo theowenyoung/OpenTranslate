@@ -1,4 +1,4 @@
-import { Language } from "@opentranslate/languages";
+import { Language } from "@theowenyoung/languages";
 import { AxiosInstance } from "axios";
 
 export type Languages = Array<Language>;
