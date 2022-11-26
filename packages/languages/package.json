@@ -28,5 +28,6 @@
   "homepage": "https://github.com/OpenTranslate/OpenTranslate/tree/master/packages/languages",
   "bugs": "https://github.com/opentranslate/opentranslate/issues/",
   "author": "OpenTranslate",
-  "license": "MIT"
+  "license": "MIT",
+  "gitHead": "f66cd9880e256a856083e76d33e7fcaa47ea51a1"
 }

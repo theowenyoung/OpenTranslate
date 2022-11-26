@@ -27,5 +27,6 @@
     "@vespaiach/axios-fetch-adapter": "^0.3.1",
     "axios": "^1.2.0",
     "franc-min": "^4.1.0"
-  }
+  },
+  "gitHead": "f66cd9880e256a856083e76d33e7fcaa47ea51a1"
 }

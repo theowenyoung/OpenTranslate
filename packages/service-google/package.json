@@ -25,5 +25,6 @@
   "dependencies": {
     "@theowenyoung/translator": "^1.5.0",
     "google-translate-open-api": "^1.3.4"
-  }
+  },
+  "gitHead": "f66cd9880e256a856083e76d33e7fcaa47ea51a1"
 }
